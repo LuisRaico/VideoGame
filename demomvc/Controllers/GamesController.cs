@@ -59,6 +59,23 @@ namespace demomvc.Controllers
             ViewData["Message"] = "El TOTAL ES :"+Total;
             return View();
         }
+         public IActionResult Editar(int id)
+        {
+            Games objGames = _context.DataGames.Find(id);
+            if(objGames == null){
+                return NotFound();
+            }
+            return View(objGames);
+        }
+
+        [HttpPost]
+        public IActionResult Editar(int id,[Bind("Id,Name,Categoria,Precio,Descuento")] Games objGames)
+        {
+             _context.Update(objGames);
+             _context.SaveChanges();
+              ViewData["Message"] = "La lista de juegos ya esta actualizado";
+             return View(objGames);
+        }
 
                    
 
