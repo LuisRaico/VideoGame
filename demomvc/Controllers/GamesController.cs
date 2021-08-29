@@ -77,6 +77,14 @@ namespace demomvc.Controllers
              return View(objGames);
         }
 
+        public IActionResult Eliminar(int id)
+        {
+         Games objGames = _context.DataGames.Find(id);
+            _context.DataGames.Remove(objGames);
+            _context.SaveChanges();
+            return RedirectToAction(nameof(Index));
+        }
+
                    
 
     }
