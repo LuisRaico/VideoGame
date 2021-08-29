@@ -1,10 +1,21 @@
 using Microsoft.AspNetCore.Mvc;
 using demomvc.Models;
+using demomvc.Data;
 
 namespace demomvc.Controllers
 {
     public class GamesController:Controller
-    {
+    {     
+        private readonly ApplicationDbGame _context;
+         public GamesController(ApplicationDbGame context)
+        {
+            _context = context;
+        }
+
+
+
+
+
         public IActionResult Index()
         {
             return View();
@@ -12,8 +23,9 @@ namespace demomvc.Controllers
                
       [HttpPost]
 
-         public IActionResult Calcular(Games objGame)
-        {
+         
+         public IActionResult Create(Games objGame)
+        {         
             double descuento,totaldescuento;
             double Total;
 
@@ -26,12 +38,15 @@ namespace demomvc.Controllers
          
              
 
-               ViewData["Message"] = "El total es de:"+Total;
-
             
+                
+            _context.Add(objGame);
+            _context.SaveChanges();
+
+
+            ViewData["Message"] = "El TOTAL ES :"+Total;
             return View("Index");
         }
-
 
                    
 
