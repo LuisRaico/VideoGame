@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using demomvc.Models;
 using demomvc.Data;
+using System.Linq;
 
 namespace demomvc.Controllers
 {
@@ -18,9 +19,20 @@ namespace demomvc.Controllers
 
         public IActionResult Index()
         {
+            return View(_context.DataGames.ToList());
+        }
+
+          public IActionResult Create()
+        {
+
             return View();
         }
-               
+
+
+
+
+
+
       [HttpPost]
 
          
@@ -45,7 +57,7 @@ namespace demomvc.Controllers
 
 
             ViewData["Message"] = "El TOTAL ES :"+Total;
-            return View("Index");
+            return View();
         }
 
                    
